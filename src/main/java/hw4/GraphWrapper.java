@@ -28,6 +28,8 @@ public class GraphWrapper {
 
 	public Iterator<String> listChildren(String parentNode){
 		ArrayList<String> nodes = graph.getAdjacencyList(parentNode);
+		if (nodes.size() == 0)
+			return nodes.iterator();
 		ArrayList<String> temp;
 		ArrayList<String> result = new ArrayList<String>();
 		Collections.sort(nodes);

@@ -8,9 +8,6 @@ import java.util.Comparator;
 
 
 public final class GraphTest {
-//	private final double JUNIT_DOUBLE_DELTA = 0.00001;
-	
-	// some simple base RatNums
 //	private Graph empty = new Graph();
 	private Graph graph1 = new Graph();
 	private Graph graph2 = new Graph();

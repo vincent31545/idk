@@ -200,6 +200,8 @@ public class Graph {
 	// @returns ArrayList<String> of adjacent nodes
 	public ArrayList<String> getAdjacencyList(String node){
 		ArrayList<String> temp = new ArrayList<String>();
+		if (nodeInGraph(node) == false)
+			return temp;
 		Enumeration<String> nodes = adjList.get(node).keys();
 		String key = "";
         while (nodes.hasMoreElements()) { 

@@ -1,0 +1,5 @@
+To reduce the time spent solving this homework, I could have collaborated with my peers to talk about the general format on what writing an ADT would look like and the subfunctions required to make the addNode and listAdjList work.
+
+The teaching staff could have gave a better guide to get the eclemma working because that was a lot of time I spent looking into it when it should not have been a difficult task to run.
+
+Before this homework I did not know how to properly write a rep invariant that covered all grounds of an ADT. I especially did not know how to write a checkRep() function for such an invariant.

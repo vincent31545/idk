@@ -25,36 +25,14 @@ public class ProfessorPaths {
 	// @modifies graph
 	// @throws IOException when the file path does not exist
 	// @returns nothing
-	private void addData(String filename) throws FileNotFoundException {
-		filename = "../" + filename;
-		BufferedReader reader = new BufferedReader(new FileReader(filename));
+	private void addData(String filename) {
 		Map<String, Set<String>> profsTeaching = new HashMap<String, Set<String>>();
 		Set<String> profs = new HashSet<String>();
-		String line = null;
-
+		
+		//get the right inputs
 		try {
-			while ((line = reader.readLine()) != null) {
-				int i = line.indexOf("\",\"");
-				if ((i == -1) || (line.charAt(0) != '\"') || (line.charAt(line.length() - 1) != '\"')) {
-					System.out.println("File " + filename + " not a CSV (\"PROFESSOR\",\"COURSE\") file.");
-				}
-				String professor = line.substring(1, i);
-				String course = line.substring(i + 3, line.length() - 1);
-
-				// Adds the professor to the professor set. If professor is already in, add has
-				// no effect.
-				profs.add(professor);
-
-				// Adds the professor to the set for the given course
-				Set<String> s = profsTeaching.get(course);
-				if (s == null) {
-					s = new HashSet<String>();
-					profsTeaching.put(course, s);
-				}
-				s.add(professor);
-			}
+			ProfessorParser.readData(filename, profsTeaching, profs);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -98,11 +76,7 @@ public class ProfessorPaths {
 	// @returns nothing
 	public void createNewGraph(String filename) {
 		graph = new Graph();
-		try {
-			addData(filename);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		addData(filename);
 	}
 
 	// @requires nothing
@@ -197,6 +171,6 @@ public class ProfessorPaths {
 //		gprofs.createNewGraph(file);
 //		
 //		System.out.println("HOI");
-//		System.out.println(gprofs.findPath("Donald Knuth","Brian Kernighan"));
+//		System.out.println(gprofs.findPath("David R Musser","John Sturman"));
 //	}
 }

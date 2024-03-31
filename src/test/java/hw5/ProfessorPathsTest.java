@@ -1,10 +1,8 @@
 package hw5;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
-import hw4.Graph;
 
 //import hw4.Graph;
 
@@ -18,7 +16,7 @@ public final class ProfessorPathsTest {
 	// createNewGraph
 	/////////////////
 	@Test
-	public void testCreateNewGraph() throws IOException {
+	public void testCreateNewGraph() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/courses.csv");
 		profPaths.createNewGraph("data/disconnectedCourses.csv");
@@ -32,7 +30,7 @@ public final class ProfessorPathsTest {
 	// findPath
 	///////////
 	@Test
-	public void testFindPath() throws IOException {
+	public void testFindPath() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/courses.csv");
 		eqPath("path from Mohammed J. Zaki to Wilfredo Colon:\n" +
@@ -59,7 +57,7 @@ public final class ProfessorPathsTest {
 	}
 	
 	@Test
-	public void testFindPathNotConnected() throws IOException {
+	public void testFindPathNotConnected() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/disconnectedCourses.csv");
 		eqPath("path from Adam to Adam:\n", profPaths.findPath("Adam", "Adam"));
@@ -94,7 +92,7 @@ public final class ProfessorPathsTest {
 	}
 	
 	@Test
-	public void testFindPathEmpty() throws IOException {
+	public void testFindPathEmpty() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/empty.csv");
 		
@@ -103,7 +101,7 @@ public final class ProfessorPathsTest {
 	}
 	
 	@Test
-	public void testFindPathOneProfessor() throws IOException {
+	public void testFindPathOneProfessor() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/one.csv");
 		eqPath("path from Dr. Callahan to Dr. Callahan:\n", profPaths.findPath("Dr. Callahan", "Dr. Callahan"));
@@ -112,7 +110,7 @@ public final class ProfessorPathsTest {
 	}
 	
 	@Test
-	public void testFindPathOneMultiCourseProfessor() throws IOException {
+	public void testFindPathOneMultiCourseProfessor() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/oneMultiCourse.csv");
 		eqPath("path from Adam to Adam:\n", profPaths.findPath("Adam", "Adam"));
@@ -121,7 +119,7 @@ public final class ProfessorPathsTest {
 	}
 	
 	@Test
-	public void testFindPathOneCourseConnection() throws IOException {
+	public void testFindPathOneCourseConnection() {
 		ProfessorPaths profPaths = new ProfessorPaths();
 		profPaths.createNewGraph("data/singleConnection.csv");
 		eqPath("path from Adam to Bob:\nAdam to Bob via Computer Science 101\n", profPaths.findPath("Adam", "Bob"));

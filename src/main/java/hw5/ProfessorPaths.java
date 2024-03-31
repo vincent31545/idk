@@ -1,6 +1,7 @@
 package hw5;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,32 +25,37 @@ public class ProfessorPaths {
 	// @modifies graph
 	// @throws IOException when the file path does not exist
 	// @returns nothing
-	private void addData(String filename) throws IOException {
+	private void addData(String filename) throws FileNotFoundException {
 		filename = "../" + filename;
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		Map<String, Set<String>> profsTeaching = new HashMap<String, Set<String>>();
 		Set<String> profs = new HashSet<String>();
 		String line = null;
 
-		while ((line = reader.readLine()) != null) {
-			int i = line.indexOf("\",\"");
-			if ((i == -1) || (line.charAt(0) != '\"') || (line.charAt(line.length() - 1) != '\"')) {
-				throw new IOException("File " + filename + " not a CSV (\"PROFESSOR\",\"COURSE\") file.");
-			}
-			String professor = line.substring(1, i);
-			String course = line.substring(i + 3, line.length() - 1);
+		try {
+			while ((line = reader.readLine()) != null) {
+				int i = line.indexOf("\",\"");
+				if ((i == -1) || (line.charAt(0) != '\"') || (line.charAt(line.length() - 1) != '\"')) {
+					System.out.println("File " + filename + " not a CSV (\"PROFESSOR\",\"COURSE\") file.");
+				}
+				String professor = line.substring(1, i);
+				String course = line.substring(i + 3, line.length() - 1);
 
-			// Adds the professor to the professor set. If professor is already in, add has
-			// no effect.
-			profs.add(professor);
+				// Adds the professor to the professor set. If professor is already in, add has
+				// no effect.
+				profs.add(professor);
 
-			// Adds the professor to the set for the given course
-			Set<String> s = profsTeaching.get(course);
-			if (s == null) {
-				s = new HashSet<String>();
-				profsTeaching.put(course, s);
+				// Adds the professor to the set for the given course
+				Set<String> s = profsTeaching.get(course);
+				if (s == null) {
+					s = new HashSet<String>();
+					profsTeaching.put(course, s);
+				}
+				s.add(professor);
 			}
-			s.add(professor);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		//add all the professor nodes to the graph
@@ -90,9 +96,13 @@ public class ProfessorPaths {
 	// @modifies graph
 	// @throws IOException when the file path does not exist
 	// @returns nothing
-	public void createNewGraph(String filename) throws IOException {
+	public void createNewGraph(String filename) {
 		graph = new Graph();
-		addData(filename);
+		try {
+			addData(filename);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// @requires nothing

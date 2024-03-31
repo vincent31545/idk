@@ -2,8 +2,16 @@ package hw4;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
 
+
+//change to set for efficency
+//change to public methods
+//use given set methods
 
 //A Graph is a directed multigraph. This means that there can be an edge going
 // from node A to node B and an edge going from node B to node A. There
@@ -38,11 +46,11 @@ public class Graph {
 	//the first key is all the nodes in the graph
 	//the second key is the adjacencyList of that particular node
 	//the third list holds all the edge weights that exist for that particular edge
-	private Dictionary<String, Dictionary<String, ArrayList<String>>> adjList;
+	private HashMap<String, HashMap<String, Set<String>>> adjList;
 	
 	//constructor
 	public Graph() {
-		adjList = new Hashtable<>();
+		adjList = new HashMap<>();
 	}
 	
 	// @requires nothing
@@ -54,7 +62,7 @@ public class Graph {
 	public void addNode(String node) {
 		if (nodeInGraph(node))
 			return;
-		adjList.put(node, new Hashtable<>());
+		adjList.put(node, new HashMap<>());
 		checkRep();
 	}
 	
@@ -64,14 +72,12 @@ public class Graph {
 	// @throws nothing
 	// @returns nothing
 	public void addEdge(String node1, String node2, String value){
-		if (edgeWeightInGraph(node1, node2, value) == true)
-			return;
-		else if (nodeInGraph(node1) == false || nodeInGraph(node2) == false)
+		if (nodeInGraph(node1) == false || nodeInGraph(node2) == false)
 			return;
 		else if (edgeInGraph(node1, node2) == false)
-			adjList.get(node1).put(node2, new ArrayList<String>());
+			adjList.get(node1).put(node2, new HashSet<String>());
 		adjList.get(node1).get(node2).add(value);
-		checkRep();
+//		checkRep();
 	}
 	
 	// @requires nothing
@@ -87,13 +93,14 @@ public class Graph {
 		else
 			return;
 		//removes the connection from other nodes to the node passed in
-		Enumeration<String> nodes = adjList.keys();
+		Set<String> nodes = adjList.keySet();
+		Iterator<String> nodesItr = nodes.iterator();
 		String key = "";
-        while (nodes.hasMoreElements()) { 
-        	key = nodes.nextElement();
-            if (edgeInGraph(key, node) == true) 
+		while(nodesItr.hasNext()) {
+			key = nodesItr.next();
+			if (edgeInGraph(key, node) == true) 
             	adjList.get(key).remove(node);
-        }
+		}
         checkRep();
 	}
 	
@@ -149,10 +156,11 @@ public class Graph {
 	// @returns ArrayList<String> of nodes
 	public ArrayList<String> getNodes(){
 		ArrayList<String> temp = new ArrayList<String>();
-		Enumeration<String> nodes = adjList.keys();
+		Set<String> nodes = adjList.keySet();
+		Iterator<String> nodesItr = nodes.iterator();
 		String key = "";
-        while (nodes.hasMoreElements()) { 
-        	key = nodes.nextElement();
+        while (nodesItr.hasNext()) { 
+        	key = nodesItr.next();
             temp.add(key);
         }
         return temp;
@@ -166,15 +174,18 @@ public class Graph {
 	// @returns ArrayList<String[]> (each edge will be an array of size 2 [source, destination]
 	public ArrayList<String[]> getEdges(){
 		ArrayList<String[]> temp = new ArrayList<String[]>();
-		Enumeration<String> startNodes = adjList.keys();
-		Enumeration<String> endNodes;
+		Set<String> startNodes = adjList.keySet();
+		Iterator<String> startNodesItr = startNodes.iterator();
+		Set<String> endNodes;
+		Iterator<String> endNodesItr;
 		String node1 = "";
 		String node2 = "";
-        while (startNodes.hasMoreElements()) { 
-        	node1 = startNodes.nextElement();
-        	endNodes = adjList.get(node1).keys();
-        	while (endNodes.hasMoreElements()) {
-        		node2 = endNodes.nextElement();
+        while (startNodesItr.hasNext()) { 
+        	node1 = startNodesItr.next();
+        	endNodes = adjList.get(node1).keySet();
+        	endNodesItr = endNodes.iterator();
+        	while (endNodesItr.hasNext()) {
+        		node2 = endNodesItr.next();
         		temp.add(new String[] {node1, node2});
         	}
         }
@@ -202,10 +213,11 @@ public class Graph {
 		ArrayList<String> temp = new ArrayList<String>();
 		if (nodeInGraph(node) == false)
 			return temp;
-		Enumeration<String> nodes = adjList.get(node).keys();
+		Set<String> nodes = adjList.get(node).keySet();
+		Iterator<String> nodesItr = nodes.iterator();
 		String key = "";
-        while (nodes.hasMoreElements()) { 
-        	key = nodes.nextElement();
+        while (nodesItr.hasNext()) { 
+        	key = nodesItr.next();
             temp.add(key);
         }
         return temp;
@@ -218,15 +230,8 @@ public class Graph {
 	// @throws nothing
 	// @returns true if the node is in the graph
 	// @returns false if the node is not in the graph
-	private boolean nodeInGraph(String node) {
-		Enumeration<String> nodes = adjList.keys();
-		String key = "";
-        while (nodes.hasMoreElements()) { 
-        	key = nodes.nextElement();
-            if (key.equals(node))
-            	return true;
-        }
-        return false;
+	public boolean nodeInGraph(String node) {
+		return adjList.containsKey(node);
 	}
 	
 	// @requires nothing
@@ -235,16 +240,9 @@ public class Graph {
 	// @modifies nothing
 	// @throws nothing
 	// @returns true if the edge is in the graph
-	// @returns true if the edge is not in the graph
-	private boolean edgeInGraph(String node1, String node2) {
-		Enumeration<String> nodes = adjList.get(node1).keys();
-		String key = "";
-        while (nodes.hasMoreElements()) {
-        	key = nodes.nextElement();
-            if (key.equals(node2))
-            	return true;
-        }
-		return false;
+	// @returns false if the edge is not in the graph
+	public boolean edgeInGraph(String node1, String node2) {
+		return adjList.get(node1).containsKey(node2);
 	}
 	
 	// @requires nothing
@@ -254,7 +252,7 @@ public class Graph {
 	// @throws nothing
 	// @returns true if the edgeWeight is in the graph
 	// @returns false if the edgeWeight is not in the graph
-	private boolean edgeWeightInGraph(String node1, String node2, String value){
+	public boolean edgeWeightInGraph(String node1, String node2, String value){
 		if (edgeInGraph(node1, node2) == true && adjList.get(node1).get(node2).contains(value))
 			return true;
 		return false;
@@ -267,18 +265,21 @@ public class Graph {
         if (getEdges().size() < 0)
         	throw new RuntimeException("Number of edges can not be negative");
         
-        Enumeration<String> nodes = adjList.keys();
-        Enumeration<String> temp;
+        Set<String> nodes = adjList.keySet();
+        Iterator<String> nodesItr = nodes.iterator();
+        Set<String> temp;
+        Iterator<String> tempItr;
         ArrayList<String> adjacentNodes;
 		String node1 = "";
 		String node2 = "";
 		int counter = 0;
-        while (nodes.hasMoreElements()) {
+        while (nodesItr.hasNext()) {
         	adjacentNodes = new ArrayList<String>();
-        	node1 = nodes.nextElement();
-        	temp = adjList.get(node1).keys();
-        	while (temp.hasMoreElements()) {
-        		node2 = temp.nextElement();
+        	node1 = nodesItr.next();
+        	temp = adjList.get(node1).keySet();
+        	tempItr = temp.iterator();
+        	while (tempItr.hasNext()) {
+        		node2 = tempItr.next();
         		if (adjacentNodes.contains(node2) == true)
         			throw new RuntimeException("There can not be duplicate edge weights");
         		adjacentNodes.add(node2);

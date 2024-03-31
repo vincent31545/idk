@@ -26,61 +26,60 @@ public class ProfessorPaths {
 	// @returns nothing
 	private void addData(String filename) throws IOException {
 		filename = "../" + filename;
-		try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-			Map<String, Set<String>> profsTeaching = new HashMap<String, Set<String>>();
-			Set<String> profs = new HashSet<String>();
-			String line = null;
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		Map<String, Set<String>> profsTeaching = new HashMap<String, Set<String>>();
+		Set<String> profs = new HashSet<String>();
+		String line = null;
 
-			while ((line = reader.readLine()) != null) {
-				int i = line.indexOf("\",\"");
-				if ((i == -1) || (line.charAt(0) != '\"') || (line.charAt(line.length() - 1) != '\"')) {
-					throw new IOException("File " + filename + " not a CSV (\"PROFESSOR\",\"COURSE\") file.");
-				}
-				String professor = line.substring(1, i);
-				String course = line.substring(i + 3, line.length() - 1);
-
-				// Adds the professor to the professor set. If professor is already in, add has
-				// no effect.
-				profs.add(professor);
-
-				// Adds the professor to the set for the given course
-				Set<String> s = profsTeaching.get(course);
-				if (s == null) {
-					s = new HashSet<String>();
-					profsTeaching.put(course, s);
-				}
-				s.add(professor);
+		while ((line = reader.readLine()) != null) {
+			int i = line.indexOf("\",\"");
+			if ((i == -1) || (line.charAt(0) != '\"') || (line.charAt(line.length() - 1) != '\"')) {
+				throw new IOException("File " + filename + " not a CSV (\"PROFESSOR\",\"COURSE\") file.");
 			}
-			
-			//add all the professor nodes to the graph
-			Iterator<String> profsIterator1;
-			Iterator<String> profsIterator2;
-			String professor1;
-			String professor2;
-			profsIterator1 = profs.iterator();
-			while(profsIterator1.hasNext()) {
-				   professor1 = profsIterator1.next();
-				   graph.addNode(professor1);
+			String professor = line.substring(1, i);
+			String course = line.substring(i + 3, line.length() - 1);
+
+			// Adds the professor to the professor set. If professor is already in, add has
+			// no effect.
+			profs.add(professor);
+
+			// Adds the professor to the set for the given course
+			Set<String> s = profsTeaching.get(course);
+			if (s == null) {
+				s = new HashSet<String>();
+				profsTeaching.put(course, s);
 			}
-			
-			//add the edges to the graph
-			String course;
-			//loops through all the courses
-			for (Map.Entry<String, Set<String>> entry : profsTeaching.entrySet()) {
-	            course = entry.getKey();
-	            
-	            //double loop of adding all the professors edges to each other
-	            Set<String> professors1 = entry.getValue();
-	            Set<String> professors2 = entry.getValue();
-	            profsIterator1 = professors1.iterator();
-	            while(profsIterator1.hasNext()) {
-				   professor1 = profsIterator1.next();
-				   profsIterator2 = professors2.iterator();
-				   while(profsIterator2.hasNext()) {
-					  professor2 = profsIterator2.next();
-					  graph.addEdge(professor1, professor2, course);
-				   }
-				}
+			s.add(professor);
+		}
+		
+		//add all the professor nodes to the graph
+		Iterator<String> profsIterator1;
+		Iterator<String> profsIterator2;
+		String professor1;
+		String professor2;
+		profsIterator1 = profs.iterator();
+		while(profsIterator1.hasNext()) {
+			   professor1 = profsIterator1.next();
+			   graph.addNode(professor1);
+		}
+		
+		//add the edges to the graph
+		String course;
+		//loops through all the courses
+		for (Map.Entry<String, Set<String>> entry : profsTeaching.entrySet()) {
+            course = entry.getKey();
+            
+            //double loop of adding all the professors edges to each other
+            Set<String> professors1 = entry.getValue();
+            Set<String> professors2 = entry.getValue();
+            profsIterator1 = professors1.iterator();
+            while(profsIterator1.hasNext()) {
+			   professor1 = profsIterator1.next();
+			   profsIterator2 = professors2.iterator();
+			   while(profsIterator2.hasNext()) {
+				  professor2 = profsIterator2.next();
+				  graph.addEdge(professor1, professor2, course);
+			   }
 			}
 		}
 	}

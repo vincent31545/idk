@@ -1,0 +1,7 @@
+I changed the adjList from a dictionary of dictionary of arrayLists to a dictionary of disctionary of sets. Sets can not have duplicate edge weights and are a faster implementation that an arrayList.
+
+I changed nodeInGraph to be a public function as well as the functions edgeInGraph and edgeWeightInGraph
+
+I changed my slow implementation of looping through the entire dictionary keys to look for a key by using the dictionary .containKeys() function.
+
+I have commented out checkRep() in addEdge to make the run time reasonable. checkRep() changes the o(n) from n^3 to n^5

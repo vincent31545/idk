@@ -39,7 +39,7 @@ public class ProfessorParser {
 				profs.add(professor);
 
 				// Adds the professor to the set for the given course
-				Set<String> s = profsTeaching.get(professor);
+				Set<String> s = profsTeaching.get(course);
 				if (s == null) {
 					s = new HashSet<String>();
 					profsTeaching.put(course, s);
@@ -48,19 +48,44 @@ public class ProfessorParser {
 			}
 		}
 	}
-
-	public static void main(String[] arg) {
-
-		String file = arg[0];
-
-		try {
-			Map<String, Set<String>> profsTeaching = new HashMap<String, Set<String>>();
-			Set<String> profs = new HashSet<String>();
-			readData(file, profsTeaching, profs);
-			System.out.println(
-					"Read " + profs.size() + " profs who have taught " + profsTeaching.keySet().size() + " courses.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//
+//	public static void main(String[] arg) {
+//
+//		String file = arg[0];
+////		file = "../data/" + file;
+//
+//		try {
+//			Map<String, Set<String>> profsTeaching = new HashMap<String, Set<String>>();
+//			Set<String> profs = new HashSet<String>();
+//			readData(file, profsTeaching, profs);
+//			System.out.println("Read " + profs.size() + " profs who have taught " + profsTeaching.keySet().size() + " courses.");
+//			System.out.println(profsTeaching.get("CSCI-1200").toString());
+//			
+//			
+////			String file = arg[0];
+//			System.out.println("HELLO WORLD");
+//			ProfessorPaths gprofs = new ProfessorPaths();
+//			gprofs.createNewGraph(file);
+////			int profCounter = 0;
+////			int courseCounter = 0;
+////			// Loop to print courses taught by each professor
+////            for (String professor : profs) {
+////            	profCounter++;
+////                System.out.println("Courses taught by " + professor + ":");
+////                for (Map.Entry<String, Set<String>> entry : profsTeaching.entrySet()) {
+////                    String course = entry.getKey();
+////                    Set<String> professors = entry.getValue();
+////                    if (professors.contains(professor)) {
+////                    	courseCounter++;
+////                        System.out.println(course);
+////                    }
+////                }
+////                System.out.println(); // Add a blank line for separation
+////            }
+////            System.out.println(profCounter);
+////            System.out.println(courseCounter);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

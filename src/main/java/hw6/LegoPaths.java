@@ -97,13 +97,14 @@ public class LegoPaths {
 	}
 	
 	// @requires nothing
-	// @param String value of the starting node (professor) and the ending node (professor)
+	// @param String value of the starting node and the ending node
 	// @effects nothing
 	// @modifies graph
 	// @throws IOException when the file path does not exist
 	// @returns Gives the shortest path of professors in the form of a string with the connecting course
 	// @returns Unknown professor if name is not in graph
 	// @returns An empty path if the start node is the destination node
+	// Uses Dikstra's algorithm
 	public String findPath(String startNode, String destNode) {
 		if (graph.nodeInGraph(startNode) == false && graph.nodeInGraph(destNode) == false && !startNode.equals(destNode))
 			return "unknown part " + startNode + "\nunknown part " + destNode + "\n";
@@ -165,24 +166,24 @@ public class LegoPaths {
 	    return ans;
 	}
 	
-	public static void main(String[] arg) throws IOException {
-		String file = arg[0];
-		LegoPaths lp = new LegoPaths();
-		System.out.println("HOI");
-		lp.createNewGraph(file);
-		System.out.println("DONE");
-//		System.out.println(lp.findPath("31367 Green Duplo Egg Base", "98138pr0080 Pearl Gold Tile Round 1 x 1 with Blue, Yellow and Black Minecraft Print"));
-//		System.out.println(lp.findPath("880006 Black Stopwatch", "3007d White Brick 2 x 8 without Bottom Tubes, 1 End Slot"));
-//		System.out.println(lp.findPath("35480 Green Plate Special 1 x 2 Rounded with 2 Open Studs", "27ac01 Light Yellow Window 1 x 2 x 1 (old type) with Extended Lip and Solid Studs, with Fixed Glass"));
-//		System.out.println(lp.findPath("76371pr0201 White Duplo Brick 1 x 2 x 2 with Bottom Tube, Target and Water Splash Print", "75266 White Duplo Car Body, Camper / Caravan Roof"));
-//		System.out.println(lp.findPath("3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8", "3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8"));
-//		System.out.println(lp.findPath("2412a White Tile Special 1 x 2 Grille with Bottom Groove", "2412a White Tile Special 1 x 2 Grille with Bottom Groove"));
-		System.out.println(lp.findPath("Adam", "Bob"));
-		System.out.println(lp.findPath("Adam", "Carl"));
-		System.out.println(lp.findPath("Adam", "Darrin"));
-		System.out.println(lp.findPath("Adam", "Eric"));
-		System.out.println(lp.findPath("Darrin", "Eric"));
-		System.out.println(lp.findPath("Bob", "Darrin"));
-		System.out.println(lp.findPath("Darrin", "Bob"));
-	}
+//	public static void main(String[] arg) throws IOException {
+//		String file = arg[0];
+//		LegoPaths lp = new LegoPaths();
+//		System.out.println("HOI");
+//		lp.createNewGraph(file);
+//		System.out.println("DONE");
+////		System.out.println(lp.findPath("31367 Green Duplo Egg Base", "98138pr0080 Pearl Gold Tile Round 1 x 1 with Blue, Yellow and Black Minecraft Print"));
+////		System.out.println(lp.findPath("880006 Black Stopwatch", "3007d White Brick 2 x 8 without Bottom Tubes, 1 End Slot"));
+////		System.out.println(lp.findPath("35480 Green Plate Special 1 x 2 Rounded with 2 Open Studs", "27ac01 Light Yellow Window 1 x 2 x 1 (old type) with Extended Lip and Solid Studs, with Fixed Glass"));
+////		System.out.println(lp.findPath("76371pr0201 White Duplo Brick 1 x 2 x 2 with Bottom Tube, Target and Water Splash Print", "75266 White Duplo Car Body, Camper / Caravan Roof"));
+////		System.out.println(lp.findPath("3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8", "3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8"));
+////		System.out.println(lp.findPath("2412a White Tile Special 1 x 2 Grille with Bottom Groove", "2412a White Tile Special 1 x 2 Grille with Bottom Groove"));
+//		System.out.println(lp.findPath("Adam", "Bob"));
+//		System.out.println(lp.findPath("Adam", "Carl"));
+//		System.out.println(lp.findPath("Adam", "Darrin"));
+//		System.out.println(lp.findPath("Adam", "Eric"));
+//		System.out.println(lp.findPath("Darrin", "Eric"));
+//		System.out.println(lp.findPath("Bob", "Darrin"));
+//		System.out.println(lp.findPath("Darrin", "Bob"));
+//	}
 }

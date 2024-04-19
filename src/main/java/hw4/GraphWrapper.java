@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class GraphWrapper {
-	private Graph graph;
+	private Graph<String, String> graph;
 	
 	public GraphWrapper() {
-		graph = new Graph();
+		graph = new Graph<String, String>();
 	}
 	
 	public void addNode(String nodeData) {

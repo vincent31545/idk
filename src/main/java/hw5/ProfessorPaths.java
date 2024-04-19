@@ -1,8 +1,8 @@
 package hw5;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+//import java.io.BufferedReader;
+//import java.io.FileNotFoundException;
+//import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import java.util.Set;
 import hw4.Graph;
 
 public class ProfessorPaths {
-	private Graph graph;
+	private Graph<String, String> graph;
 	
 	// @requires nothing
 	// @param String value of the file path
@@ -75,7 +75,7 @@ public class ProfessorPaths {
 	// @throws IOException when the file path does not exist
 	// @returns nothing
 	public void createNewGraph(String filename) {
-		graph = new Graph();
+		graph = new Graph<String, String>();
 		addData(filename);
 	}
 

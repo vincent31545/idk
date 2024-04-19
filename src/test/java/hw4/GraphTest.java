@@ -5,15 +5,16 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 
-public final class GraphTest {
+public final class GraphTest<T> {
 //	private Graph empty = new Graph();
-	private Graph graph1 = new Graph();
-	private Graph graph2 = new Graph();
-	private Graph graph3 = new Graph();
+	private Graph<String, String> graph1 = new Graph<String, String>();
+	private Graph<String, String> graph2 = new Graph<String, String>();
+	private Graph<String, String> graph3 = new Graph<String, String>();
 	
-	private void eqNodes(Graph g, String rep) {
+	private void eqNodes(Graph<String, String> g, String rep) {
 		ArrayList<String> temp = g.getNodes();
 		Collections.sort(temp);
 		String ans = "";
@@ -25,10 +26,12 @@ public final class GraphTest {
 		assertEquals(ans, rep);
 	}
 	
-	private void eqEdges(Graph g, String rep) {
-		ArrayList<String[]> temp = g.getEdges();
-		temp.sort(Comparator.comparing(a -> a[1]));
-		temp.sort(Comparator.comparing(a -> a[0]));
+	private void eqEdges(Graph<String, String> g, String rep) {
+		ArrayList<ArrayList<String>> temp = g.getEdges();
+//		temp.sort(Comparator.comparing(a -> a[1]));
+//		temp.sort(Comparator.comparing(a -> a[0]));
+		temp.sort(Comparator.comparing((ArrayList<String> a) -> a.get(1)));
+		temp.sort(Comparator.comparing((ArrayList<String> a) -> a.get(0)));
 		String ans = "";
 		for (int i = 0; i < temp.size()-1; i++)
 			ans = ans + String.join("->", temp.get(i))  + ", ";
@@ -38,18 +41,18 @@ public final class GraphTest {
 		assertEquals(ans, rep);
 	}
 	
-	private void eqEdgeWeights(Graph g, String rep) {
-		ArrayList<String[]> temp = g.getEdges();
+	private void eqEdgeWeights(Graph<String, String> g, String rep) {
+		ArrayList<ArrayList<String>> temp = g.getEdges();
 		ArrayList<String> ansList = new ArrayList<String>();
 		String ans;
 		for (int i = 0; i < temp.size(); i++)
-			ansList.addAll(g.getEdgeWeight(temp.get(i)[0], temp.get(i)[1]));
+			ansList.addAll(g.getEdgeWeight(temp.get(i).get(0), temp.get(i).get(1)));
 		Collections.sort(ansList);
 		ans = String.join(", ", ansList);
 		assertEquals(ans, rep);
 	}
 	
-	private void eqAdjList(Graph g, String node, String rep) {
+	private void eqAdjList(Graph<String, String> g, String node, String rep) {
 		ArrayList<String> temp = g.getAdjacencyList(node);
 		Collections.sort(temp);
 		String ans = "";
@@ -65,7 +68,7 @@ public final class GraphTest {
 	//////////////
 	@Test
 	public void testConstructor() {
-		new Graph();
+		new Graph<String, String>();
 	}
 	
 	//////////

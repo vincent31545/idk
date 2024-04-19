@@ -49,31 +49,33 @@ public class LegoPaths {
 			graph.addNode(part1);
 		}
 		
-		//add the edges to the graph
-		String lego;
 		double weight = 0.0;
 		//loops through all the courses
 		for (Map.Entry<String, Set<String>> entry : legoMap.entrySet()) {
-			lego = entry.getKey();
-			
 			//double loop of adding all the professors edges to each other
 			Set<String> legos1 = entry.getValue();
-			Set<String> legos2 = entry.getValue();
-			legoIterator1 = legos1.iterator();
-			while(legoIterator1.hasNext()) {
-        	   part1 = legoIterator1.next();
-			   legoIterator2 = legos2.iterator();
-			   while(legoIterator2.hasNext()) {
-				   part2 = legoIterator2.next();
-				   if (graph.edgeInGraph(part1, part2)) {
+			ArrayList<String> arr1 = new ArrayList<String>(legos1);
+			
+			for (int i = 0; i < arr1.size(); i++) {
+				for (int j = i; j < arr1.size(); j++) {
+					part1 = arr1.get(i);
+					part2 = arr1.get(j);
+					if (part1.equals(part2))
+						continue;
+					if (graph.edgeInGraph(part1, part2)) {
 					   weight = graph.getEdgeWeight(part1, part2).get(0);
-					   graph.removeEdge(part1, part2);
-//					   weight = 1/ (1/weight + 1);
+//					   graph.removeEdge(part1, part2);
+//					   graph.removeEdge(part2, part1);
+//						   weight = 1/ (1/weight + 1);
 					   graph.addEdge(part1, part2, weight + 1);
-				   } else {
+					   graph.addEdge(part2, part1, weight + 1);
+					   graph.removeEdgeWeight(part1, part2, weight);
+					   graph.removeEdgeWeight(part2, part1, weight);
+					} else {
 					   graph.addEdge(part1, part2, 1.0);
-				   }
-			   }
+					   graph.addEdge(part2, part1, 1.0);
+					}
+				}
 			}
 		}
 	}
@@ -166,18 +168,18 @@ public class LegoPaths {
 	    return ans;
 	}
 	
-//	public static void main(String[] arg) throws IOException {
-//		String file = arg[0];
-//		LegoPaths lp = new LegoPaths();
-//		System.out.println("HOI");
-//		lp.createNewGraph(file);
+	public static void main(String[] arg) throws IOException {
+		String file = arg[0];
+		LegoPaths lp = new LegoPaths();
+		System.out.println("HOI");
+		lp.createNewGraph(file);
 //		System.out.println("DONE");
-////		System.out.println(lp.findPath("31367 Green Duplo Egg Base", "98138pr0080 Pearl Gold Tile Round 1 x 1 with Blue, Yellow and Black Minecraft Print"));
-////		System.out.println(lp.findPath("880006 Black Stopwatch", "3007d White Brick 2 x 8 without Bottom Tubes, 1 End Slot"));
-////		System.out.println(lp.findPath("35480 Green Plate Special 1 x 2 Rounded with 2 Open Studs", "27ac01 Light Yellow Window 1 x 2 x 1 (old type) with Extended Lip and Solid Studs, with Fixed Glass"));
-////		System.out.println(lp.findPath("76371pr0201 White Duplo Brick 1 x 2 x 2 with Bottom Tube, Target and Water Splash Print", "75266 White Duplo Car Body, Camper / Caravan Roof"));
-////		System.out.println(lp.findPath("3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8", "3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8"));
-////		System.out.println(lp.findPath("2412a White Tile Special 1 x 2 Grille with Bottom Groove", "2412a White Tile Special 1 x 2 Grille with Bottom Groove"));
+//		System.out.println(lp.findPath("31367 Green Duplo Egg Base", "98138pr0080 Pearl Gold Tile Round 1 x 1 with Blue, Yellow and Black Minecraft Print"));
+//		System.out.println(lp.findPath("880006 Black Stopwatch", "3007d White Brick 2 x 8 without Bottom Tubes, 1 End Slot"));
+//		System.out.println(lp.findPath("35480 Green Plate Special 1 x 2 Rounded with 2 Open Studs", "27ac01 Light Yellow Window 1 x 2 x 1 (old type) with Extended Lip and Solid Studs, with Fixed Glass"));
+//		System.out.println(lp.findPath("76371pr0201 White Duplo Brick 1 x 2 x 2 with Bottom Tube, Target and Water Splash Print", "75266 White Duplo Car Body, Camper / Caravan Roof"));
+//		System.out.println(lp.findPath("3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8", "3035 Dark Gray Plate 4 x 8 to 3035 Dark Gray Plate 4 x 8"));
+//		System.out.println(lp.findPath("2412a White Tile Special 1 x 2 Grille with Bottom Groove", "2412a White Tile Special 1 x 2 Grille with Bottom Groove"));
 //		System.out.println(lp.findPath("Adam", "Bob"));
 //		System.out.println(lp.findPath("Adam", "Carl"));
 //		System.out.println(lp.findPath("Adam", "Darrin"));
@@ -185,5 +187,5 @@ public class LegoPaths {
 //		System.out.println(lp.findPath("Darrin", "Eric"));
 //		System.out.println(lp.findPath("Bob", "Darrin"));
 //		System.out.println(lp.findPath("Darrin", "Bob"));
-//	}
+	}
 }

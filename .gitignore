@@ -1,1 +1,3 @@
 data/courses.csv
+data/lego*
+data/*.out

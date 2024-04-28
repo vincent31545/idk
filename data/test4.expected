@@ -1,0 +1,53 @@
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Pittsburgh Building to West Hall:
+	Walk W to (West Hall)
+Total distance: 122.457 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Walker Laboratory to Pittsburgh Building:
+	Walk N to (Pittsburgh Building)
+Total distance: 153.594 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Pittsburgh Building to Walker Laboratory:
+	Walk NE to (Walker Laboratory)
+Total distance: 153.594 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from 87 Gymnasium to J Building:
+	Walk W to (Troy Building)
+	Walk NE to (Intersection 132)
+	Walk NW to (Blaw-Knox 1 & 2)
+	Walk NE to (Boiler House at 11th Street)
+	Walk N to (J Building)
+Total distance: 443.226 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from H Building to Alumni House:
+Total distance: 93.814 pixel units.
+b lists all buildings
+r prints directions for the shortest route between any two buildings
+q quits the program
+m prints a menu of all commands
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Commons Dining Hall to Empire State Hall:
+	Walk NW to (Public Safety)
+	Walk W to (Intersection 141)
+	Walk SW to (CII)
+	Walk SW to (DCC)
+	Walk SW to (Intersection 138)
+	Walk SW to (Science Center)
+	Walk SW to (Intersection 135)
+	Walk SW to (Cogswell Laboratory)
+	Walk W to (Empire State Hall)
+Total distance: 736.269 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Java++ Cafe to Beman Park Firehouse:
+	Walk N to (Intersection 102)
+	Walk N to (Intersection 139)
+	Walk N to (Intersection 140)
+	Walk N to (Intersection 106)
+	Walk N to (Intersection 108)
+	Walk N to (Intersection 112)
+	Walk SW to (2021 Peoples Avenue)
+	Walk W to (Beman Park Firehouse)
+Total distance: 849.403 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Nugent Hall to Nason Hall:
+	Walk E to (Intersection 123)
+	Walk E to (Nason Hall)
+Total distance: 171.943 pixel units.
+First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Colonie Apartments to Bryckwyck:
+	Walk E to (Intersection 116)
+	Walk E to (Intersection 115)
+	Walk E to (Bryckwyck)
+Total distance: 705.462 pixel units.
+

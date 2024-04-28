@@ -1,0 +1,5 @@
+I could have doen better if I did not start making a big massive class and break it down later. It would have saved time to not integrate both the controller and the model at once and break those into their corresponding classes. I could have throughly read the pdf to understand the goal of the homework. 
+
+The psoft staff did well for this homework. The only thing that could have been done better was give an extra late day because it was assigned a day later than one week.
+
+I now know how to make classes that are open for additions but closed for changes. I know how to seperate actions into model view and controller classes.

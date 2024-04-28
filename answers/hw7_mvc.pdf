@@ -1,0 +1,10 @@
+model:
+CampusPathsModel
+
+view / controller:
+CampusPathsUI
+
+AcceptInput acts as the controller as it takes user input and runs blocks of code that lead
+to what the user is looking for. printPaths acts as a view method and only prints back data in
+a way that the user can understand. AcceptInput also has parts of a view method as it prints back
+smaller blocks of code to ther user on more basic requests.

@@ -80,17 +80,17 @@ Warren Hall,45
 West Hall,2
 Winslow Building,78
 First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from Academy Hall to EMPAC:
-	Walk N to (Intersection 138)
-	Walk NW to (Engineering Center)
-	Walk W to (Folsom Library)
-	Walk SW to (EMPAC)
-Total distance: 646.088 pixel units.
+	Walk W to (Cogswell Laboratory)
+	Walk W to (Empire State Hall)
+	Walk W to (MRC)
+	Walk W to (EMPAC)
+Total distance: 490.489 pixel units.
 First building id/name, followed by Enter: Second building id/name, followed by Enter: Path from EMPAC to Academy Hall:
-	Walk E to (Engineering Center)
-	Walk SE to (Intersection 138)
-	Walk S to (Intersection 137)
+	Walk E to (Empire State Hall)
+	Walk E to (Cogswell Laboratory)
+	Walk E to (Intersection 137)
 	Walk SE to (Academy Hall)
-Total distance: 646.088 pixel units.
+Total distance: 490.489 pixel units.
 First building id/name, followed by Enter: Second building id/name, followed by Enter: There is no path from LINAC Facility to Radio Club.
 First building id/name, followed by Enter: Second building id/name, followed by Enter: Unknown building: [cbis]
 Unknown option

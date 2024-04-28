@@ -164,6 +164,21 @@ public class ProfessorPaths {
 //		}
 //		return ans;
 //	}
+//	private String printCourses() {
+//	ArrayList<String[]> courses = graph.getEdges();
+//	Set<String[]> coursesSet = new HashSet<>(courses);
+//	Iterator<String[]> setItr = coursesSet.iterator();
+//	String ans = "";
+//	int counter = 0;
+//	while (setItr.hasNext()) {
+//		String[] temp = setItr.next();
+//		ans = ans + graph.getEdgeWeight(temp[0], temp[1]) + " ";
+//		counter++;
+//		if (counter != 0 && counter %100 == 0)
+//			ans = ans + "\n";
+//	}
+//	return ans;
+//}
 	
 //	public static void main(String[] arg) throws IOException {
 //		String file = arg[0];

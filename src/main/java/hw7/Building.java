@@ -1,7 +1,5 @@
 package hw7;
 
-// A Building is an RPI campus structure that has a name and location in RPI.
-
 public class Building {
 	// Abstraction Function:
     // A building has a name (even if it is an empty string), an id, an x coordinate, and an y coordinate. The x coordinate and the y coordinate correspond
